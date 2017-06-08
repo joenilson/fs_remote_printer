@@ -1,0 +1,23 @@
+{
+  "name": "fs_remote_printer",
+  "version": "1.0.0",
+  "description": "FacturaScripts Remote Printer",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joenilson/fs_remote_printer.git"
+  },
+  "author": "",
+  "license": "LGPL-3.0",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "electron": "^1.6.10",
+    "express": "^4.15.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1"
+  }
+}
