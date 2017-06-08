@@ -4,7 +4,7 @@
   "description": "FacturaScripts Remote Printer",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
+    "start": "node ..\/..\/..\/..\/usr\/local\/bin\/electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
