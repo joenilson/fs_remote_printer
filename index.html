@@ -29,11 +29,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <div class="panel-heading">
                 <h3 class="panel-title"><span class="fa fa-print"></span>&nbsp;Control de impresoras</h3>
             </div>
-            <div class="panel-body">
-                Aqui se agregarán las impresoras locales para FacturaScripts
+            <div class="panel-body" id="lista_impresoras">
+                <ul class="list-group">
+                    <li class="list-group-item active">Impresoras disponibles</li>
+                </ul>
             </div>
         </div>
-        <script>window.$ = window.jQuery = require('./assets/js/jquery.min.js');</script>
+        <script src="assets/js/jquery.min.js"></script>
+        <script type="application/javascript">
+        if (typeof module === 'object' && typeof module.exports !== 'undefined') {
+            window.$ = window.jQuery = module.exports;
+        }
+        </script>
         <script src="assets/js/bootstrap.min.js"></script>
+        <script src="./app/impresoras.js" ></script>
+        <script src="./app/view.js" ></script>
     </body>
 </html>

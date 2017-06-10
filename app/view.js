@@ -14,26 +14,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-'use strict';
-
-const electron = require('electron');
-
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-let mainWindow;
-
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('ready', function () {
-    mainWindow = new BrowserWindow({width: 800, height: 600});
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
-    mainWindow.openDevTools();
-    mainWindow.on('closed', function () {
-        mainWindow = null;
-    });
+let $ = require('jquery');
+var impresoras = printer.getPrinters();
+$.each(impresoras, function(index, element){
+    $('#lista_impresoras ul').append(
+        $('<li class="list-group-item">').append(
+            $('<a>').attr('href','/impresora/'+element.name).append(
+                $('<span>').attr('class', 'tab').append(element.name)
+    )));
 });
 
