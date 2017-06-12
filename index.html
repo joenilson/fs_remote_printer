@@ -21,19 +21,59 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>FS Remote Printer ver 1.0.0</title>
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="assets/css/bootstrap-paper.min.css" />
         <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
     </head>
     <body>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><span class="fa fa-print"></span>&nbsp;Control de impresoras</h3>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-print"></span>&nbsp;Control de impresoras</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="lista_impresoras">
+                        <ul class="list-group">
+
+                        </ul>
+                    </div>
+                    <div id="configuracion_servidor">
+                        <div class="form-group">
+                            <label for="servidor" class="col-sm-2 control-label active">Servidor Facturascripts</label>
+                            <div class="col-sm-10">
+                                <input type="url" class="form-control" id="servidor" name="servidor" placeholder="http://mi_servidor/facturascripts">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="b_servidor_conf" type="submit" class="btn btn-sm btn-primary pull-right">Verificar y Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <button type="button" class="btn btn-info btn-sm btn-block"><span class="fa fa-print"></span>  Comprobar Impresión</button>
+                    </div>
+                </div>
+                <div class="panel panel-footer">
+                    <div id="alerta_configuracion" class="alert alert-warning alert-dismissible hidden" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Advertencia!</strong>No hay una impresora configurada, por favor seleccione una del listado de impresoras detectadas y realice pruebas de impresión.
+                    </div>
+                    <div id="alerta_generica" class="alert alert-warning alert-dismissible hidden" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div id="alerta_generica_texto">
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body" id="lista_impresoras">
-                <ul class="list-group">
-                    <li class="list-group-item active">Impresoras disponibles</li>
-                </ul>
-            </div>
+        </div>
         </div>
         <script src="assets/js/jquery.min.js"></script>
         <script type="application/javascript">
