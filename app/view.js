@@ -14,6 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+//cargamos los dialogos de electron
+const {dialog} = require('electron').remote;
 //Cargamos jquery
 let $ = require('jquery');
 //Cargamos filesystem para leer el archivo de configuración de la impresora a utilizar
@@ -30,9 +32,7 @@ function escribirConfiguracion(){
     var json = JSON.stringify(config_data);
     fs.writeFile(configuracion, json, (err) => {
         if (err) {
-            $('#alerta_generica_texto').html();
-            $('#alerta_generica_texto').html('Hubo un error intentando crear el archivo de configuración, por favor cierre la aplicación y vuelva a abrirla.');
-            $('#alerta_generica').show();
+            dialog.showErrorBox('Archivo de Configuración', "Hubo un error intentando crear el archivo de configuración, por favor cierre la aplicación y vuelva a abrirla.");
         }
     });
 }
@@ -65,6 +65,30 @@ function cargarImpresoras(){
     });
 }
 
+function verificarUrl(){
+    var server_url = $('#servidor').val();
+    if(server_url){
+        var request = require('request');
+        request(server_url+'/api.php?v=2&f=remote_printer', function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                config_data.servidor_url = server_url;
+                escribirConfiguracion();
+                dialog.showMessageBox({ message: '¡Servidor sincronizado correctamente!', buttons: ["OK"] });
+            }else{
+                dialog.showErrorBox('URL incorrecta', "Ocurrió un error intentando conectar al servidor, compruebe la dirección ingresada.");
+            }
+        });
+    }else{
+        dialog.showErrorBox('URL vacia', "Debe colocar la direccion web de su instalación de FacturaScripts.");
+    }
+}
+
+function mostrarUrl(){
+    if(config_data.servidor_url){
+        $('#servidor').val(config_data.servidor_url);
+    }
+}
+
 function elegirImpresora(nombre){
     if(nombre.length > 0){
         config_data.nombre_impresora = nombre;
@@ -76,3 +100,4 @@ function elegirImpresora(nombre){
 cargarConfiguracion();
 //Cargamos el listado de impresoras
 cargarImpresoras();
+mostrarUrl();
