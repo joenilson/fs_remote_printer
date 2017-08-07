@@ -42,18 +42,14 @@ app.get('/', function (req, res) {
                         });
                     },
                     error:function(err){
-                        //console.log(err);
+                        
                     }
                 });
             }
-        }else{
-            console.log('Error: '+error);
         }
     });
 });
 
 var server = app.listen(10080, function () {
-    var host = server.address().address;
-    var port = server.address().port;
-    //console.log("Servidor activo en http://%s:%s", host, port);
+    
 });
