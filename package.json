@@ -16,7 +16,6 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "electron": "^1.6.10",
-    "electron-notify": "^0.1.0",
     "express": "^4.15.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
@@ -27,8 +26,29 @@
   },
   "build": {
     "appId": "com.facturascripts.remote_printer",
+    "nodeGypRebuild": true,
     "mac": {
       "category": "public.app-category.utilities"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
     },
     "publish": [
       {
