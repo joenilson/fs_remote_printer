@@ -29,6 +29,16 @@ let config_data = false;
 //Llamamos a la versión de la aplicacion
 let appVersion = '1.0.0';
 
+const notifier = require('node-notifier');
+//Mostramos el aviso que ya cargó la aplicación
+notifier.notify({
+    title: 'Remote Printer activo',
+    message: '¡Remote Printer esta corriendo en el área de notificación!',
+    icon: path.join(__dirname, 'assets/images/icon.png'), // Absolute path (doesn't work on balloons)
+    sound: false, // Only Notification Center or Windows Toasters
+    wait: false // Wait with callback, until user action is taken against notification
+});
+
 function escribirConfiguracion(){
     var json = JSON.stringify(config_data);
     fs.writeFile(configuracion, json, (err) => {
@@ -73,6 +83,13 @@ function impresionPrueba()
         printer: config_data.nombre_impresora,
         type: 'TEXT', // type: RAW, TEXT, PDF, JPEG, .. depends on platform
         success:function(jobID){
+            notifier.notify({
+                title: 'Remote Printer imprimiendo',
+                message: 'Se esta imprimiendo el trabajo con id: '+jobID,
+                icon: path.join(__dirname, 'assets/images/icon.png'), // Absolute path (doesn't work on balloons)
+                sound: false, // Only Notification Center or Windows Toasters
+                wait: false // Wait with callback, until user action is taken against notification
+            });
             console.log("Impresión con ID: "+jobID);
         },
         error:function(err){

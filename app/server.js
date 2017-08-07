@@ -24,17 +24,26 @@ app.get('/', function (req, res) {
     var printer = require('printer');
     request(server_url+'/api.php?v=2&f=remote_printer&terminal='+data.query.terminal, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            printer.printDirect({
-                data: body, 
-                printer: config_data.nombre_impresora,
-                type: 'RAW', // type: RAW, TEXT, PDF, JPEG, .. depends on platform
-                success:function(jobID){
-                    console.log("Impresión con ID: "+jobID);
-                },
-                error:function(err){
-                    console.log(err);
-                }
-            });
+            if(body){
+                printer.printDirect({
+                    data: body, 
+                    printer: config_data.nombre_impresora,
+                    type: 'RAW', // type: RAW, TEXT, PDF, JPEG, .. depends on platform
+                    success:function(jobID){
+                        notifier.notify({
+                            title: 'Remote Printer imprimiendo',
+                            message: '¡Remote Printer esta imprimiendo el trabajo con id: '+jobID,
+                            icon: path.join(__dirname, 'assets/images/icon.png'), // Absolute path (doesn't work on balloons)
+                            sound: false, // Only Notification Center or Windows Toasters
+                            wait: false // Wait with callback, until user action is taken against notification
+                        });
+                        console.log("Impresión con ID: "+jobID);
+                    },
+                    error:function(err){
+                        console.log(err);
+                    }
+                });
+            }
         }else{
             console.log('Error: '+error);
         }
