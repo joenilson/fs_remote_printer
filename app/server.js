@@ -17,31 +17,28 @@
 var express = require('express');
 var app = express();
 
-app.get('/prueba/:nick', function (req, res) {
-    var data = {nombre: 'Joe Nilson', apellidos: 'Zegarra Galvez', nick: req.params.nick};
-    console.log(data);
-    res.end(JSON.stringify(data));
-});
-
 app.get('/', function (req, res) {
     var server_url = $('#servidor').val();
     var data = req;
-    console.log(data);
     var request = require('request');
+    var printer = require('printer');
     request(server_url+'/api.php?v=2&f=remote_printer&terminal='+data.query.terminal, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            console.log('Respuesta 1: '+JSON.stringify(response));
-            console.log('Respuesta 2: '+body);
+            printer.printDirect({
+                data: body, 
+                printer: config_data.nombre_impresora,
+                type: 'RAW', // type: RAW, TEXT, PDF, JPEG, .. depends on platform
+                success:function(jobID){
+                    console.log("Impresión con ID: "+jobID);
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
         }else{
             console.log('Error: '+error);
         }
     });
-});
-
-app.get('/imprimir/:filepath', function (req, res) {
-    var data = {nombre: 'Joe Nilson', apellidos: 'Zegarra Galvez', nick: req.params.nick};
-    console.log(data);
-    res.end(JSON.stringify(data));
 });
 
 var server = app.listen(10080, function () {

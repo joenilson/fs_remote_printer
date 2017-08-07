@@ -20,13 +20,14 @@ const {dialog} = require('electron').remote;
 let $ = require('jquery');
 //Cargamos filesystem para leer el archivo de configuración de la impresora a utilizar
 let fs = require('fs');
+//Cargamos la variable path
+let path = require('path');
 //Indicamos cual es el archivo de configuración de la impresora
 let configuracion = 'app/config.json';
 //Creamos la variable donde guardaremos la configuracion
 let config_data = false;
-//Leemos el listado de las impresoras de printer que la cargamos en impresoras.js
-var impresoras = printer.getPrinters();
-
+//Llamamos a la versión de la aplicacion
+let appVersion = '1.0.0';
 
 function escribirConfiguracion(){
     var json = JSON.stringify(config_data);
@@ -46,7 +47,7 @@ function cargarConfiguracion(){
     }
     else {
         //Si no existe el archivo lo creamos con valores vacios
-        config_data = '{\n"nombre_impresora":"",\n"tipo_impresora":""\n}\n';
+        config_data = {nombre_impresora: '', tipo_impresora: ''};
         escribirConfiguracion();
     }
 }
@@ -62,6 +63,21 @@ function cargarImpresoras(){
             success = ' list-group-item-success';
         }
         $("#lista_impresoras ul").append('<li class="list-group-item'+success+'">'+element.name+' '+badge+'</li>');
+    });
+}
+
+function impresionPrueba()
+{
+    printer.printDirect({
+        data: 'Impresión de prueba desde '+config_data.servidor_url+"\n\n hacia la impresora: "+config_data.nombre_impresora+"\n\n\nFacturaScripts Remote Printer version "+appVersion, 
+        printer: config_data.nombre_impresora,
+        type: 'TEXT', // type: RAW, TEXT, PDF, JPEG, .. depends on platform
+        success:function(jobID){
+            console.log("Impresión con ID: "+jobID);
+        },
+        error:function(err){
+            console.log(err);
+        }
     });
 }
 

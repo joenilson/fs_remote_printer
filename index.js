@@ -17,23 +17,67 @@
 'use strict';
 
 const electron = require('electron');
-
+const path = require('path');
 const app = electron.app;
+const Menu = electron.Menu;
 const BrowserWindow = electron.BrowserWindow;
+const Tray = electron.Tray;
+const iconPath = path.join(__dirname, 'assets/images/icon.png');
+let appIcon = null;
 let mainWindow;
-
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
+let win;
 
 app.on('ready', function () {
+    win = new BrowserWindow({show: false, width: 800, height: 600});
+    win.loadURL('file://' + __dirname + '/index.html');
+    appIcon = new Tray('assets/images/icon.png');
+    var contextMenu = Menu.buildFromTemplate([
+        {
+            label: 'Remote Printer',
+            icon: iconPath,
+            click: function(){
+                win.show();
+            }
+        },{
+            label: 'Modo Debug',
+            accelerator: 'Alt+Command+I',
+            click: function () {
+                win.toggleDevTools();
+            }
+        },{
+            label: 'Cerrar Aplicación',
+            accelerator: 'Command+Q',
+            selector: 'terminate:',
+            click: function(){
+                app.isQuiting = true;
+                app.quit();
+            }
+        }
+    ]);
+    
+    appIcon.setToolTip('This is my application.');
+    appIcon.setContextMenu(contextMenu);
+    win.on('close', function (event) {
+        if(!app.isQuiting){
+            event.preventDefault();
+            win.hide();
+        }
+        return false;
+    });
+    win.on('minimize', function (event) {
+        event.preventDefault();
+        win.hide();
+    });
+    win.on('show', function () {
+        appIcon.setHighlightMode('always');
+    });
+    /*
     mainWindow = new BrowserWindow({width: 800, height: 600});
     mainWindow.loadURL('file://' + __dirname + '/index.html');
     mainWindow.openDevTools();
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
+    */
 });
 

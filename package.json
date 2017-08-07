@@ -11,15 +11,33 @@
     "type": "git",
     "url": "git+https://github.com/joenilson/fs_remote_printer.git"
   },
-  "author": "",
+  "author": "FacturaScripts",
   "license": "LGPL-3.0",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "electron": "^1.6.10",
+    "electron-notify": "^0.1.0",
     "express": "^4.15.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
+    "node-pre-gyp": "^0.6.36",
     "node-printer": "^1.0.2",
     "printer": "git+https://github.com/tojocky/node-printer.git"
+  },
+  "build": {
+    "appId": "com.facturascripts.remote_printer",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "joenilson",
+        "repo": "fs_remote_printer"
+      }
+    ]
+  },
+  "devDependencies": {
+    "electron-builder": "19.19.1"
   }
 }
