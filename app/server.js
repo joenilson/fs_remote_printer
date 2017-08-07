@@ -40,10 +40,9 @@ app.get('/', function (req, res) {
                             sound: false, // Only Notification Center or Windows Toasters
                             wait: false // Wait with callback, until user action is taken against notification
                         });
-                        console.log("Impresión con ID: "+jobID);
                     },
                     error:function(err){
-                        console.log(err);
+                        //console.log(err);
                     }
                 });
             }
@@ -56,5 +55,5 @@ app.get('/', function (req, res) {
 var server = app.listen(10080, function () {
     var host = server.address().address;
     var port = server.address().port;
-    console.log("Servidor activo en http://%s:%s", host, port);
+    //console.log("Servidor activo en http://%s:%s", host, port);
 });
