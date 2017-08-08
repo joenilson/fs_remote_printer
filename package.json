@@ -28,6 +28,7 @@
     "printer": "git+https://github.com/tojocky/node-printer.git"
   },
   "build": {
+    "productName": "FS Remote Printer",
     "appId": "com.facturascripts.remote_printer",
     "mac": {
       "category": "public.app-category.utilities"
@@ -38,11 +39,11 @@
       "contents": [
         {
           "x": 192,
-          "y": 344
+          "y": 214
         },
         {
           "x": 448,
-          "y": 344,
+          "y": 214,
           "type": "link",
           "path": "/Applications"
         }

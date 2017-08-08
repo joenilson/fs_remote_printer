@@ -23,8 +23,8 @@ const Menu = electron.Menu;
 const BrowserWindow = electron.BrowserWindow;
 const Tray = electron.Tray;
 const iconPath = path.join(__dirname, 'assets/images/icon.png');
+
 let appIcon = null;
-let mainWindow;
 let win;
 
 app.on('ready', function () {
@@ -71,13 +71,5 @@ app.on('ready', function () {
     win.on('show', function () {
         appIcon.setHighlightMode('always');
     });
-    /*
-    mainWindow = new BrowserWindow({width: 800, height: 600});
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
-    mainWindow.openDevTools();
-    mainWindow.on('closed', function () {
-        mainWindow = null;
-    });
-    */
 });
 

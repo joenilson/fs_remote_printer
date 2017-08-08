@@ -23,7 +23,7 @@ let fs = require('fs');
 //Cargamos la variable path
 let path = require('path');
 //Indicamos cual es el archivo de configuración de la impresora
-let configuracion = 'app/config.json';
+let configuracion = path.join(__dirname, 'app/config.json');
 //Creamos la variable donde guardaremos la configuracion
 let config_data = false;
 //Llamamos a la versión de la aplicacion
