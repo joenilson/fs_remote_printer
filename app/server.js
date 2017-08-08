@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
             if(body){
                 printer.printDirect({
                     data: body, 
-                    printer: config_data.nombre_impresora,
+                    printer: settings.get('config.nombre_impresora'),
                     type: 'RAW', // type: RAW, TEXT, PDF, JPEG, .. depends on platform
                     success:function(jobID){
                         notifier.notify({
