@@ -20,7 +20,7 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
+app.get('/', function (req) {
     var server_url = $('#servidor').val();
     var data = req;
     var request = require('request');
@@ -40,9 +40,6 @@ app.get('/', function (req, res) {
                             sound: false, // Only Notification Center or Windows Toasters
                             wait: false // Wait with callback, until user action is taken against notification
                         });
-                    },
-                    error:function(err){
-                        
                     }
                 });
             }
