@@ -1,7 +1,6 @@
 # fs_remote_printer
 Aplicación para impresión remota desde FacturaScripts
 
-
 # No hay un empaquetado para tu distribución?
 Instala npm con tu gestor de paquetes, mira en [la documentación oficial](https://github.com/electron-userland/electron-builder/wiki/Options#LinuxBuildOptions-target) cual se corresponde mejor para añadirlo en *target* dentro de package.json y seguidamente en la raíz de fs_remote_printer ejecuta:
 
