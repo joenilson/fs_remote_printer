@@ -59,3 +59,7 @@ typings/
 
 /nbproject/private/
 /app/config.json
+/dist/mac/
+/dist/fs_remote_printer-1.0.0-mac.zip
+/dist/latest-mac.yml
+/dist/github/

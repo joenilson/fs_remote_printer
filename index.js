@@ -30,7 +30,7 @@ let win;
 app.on('ready', function () {
     win = new BrowserWindow({show: false, width: 800, height: 600});
     win.loadURL('file://' + __dirname + '/index.html');
-    appIcon = new Tray('assets/images/icon.png');
+    appIcon = new Tray(iconPath);
     var contextMenu = Menu.buildFromTemplate([
         {
             label: 'Remote Printer',
@@ -54,7 +54,7 @@ app.on('ready', function () {
             }
         }
     ]);
-    
+
     appIcon.setToolTip('This is my application.');
     appIcon.setContextMenu(contextMenu);
     win.on('close', function (event) {

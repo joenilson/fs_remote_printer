@@ -79,7 +79,7 @@ function cargarImpresoras(){
 function impresionPrueba()
 {
     printer.printDirect({
-        data: 'Impresión de prueba desde '+config_data.servidor_url+"\n\n hacia la impresora: "+config_data.nombre_impresora+"\n\n\nFacturaScripts Remote Printer version "+appVersion, 
+        data: 'Impresión de prueba desde '+config_data.servidor_url+"\n\n hacia la impresora: "+config_data.nombre_impresora+"\n\n\nFacturaScripts Remote Printer version "+appVersion,
         printer: config_data.nombre_impresora,
         type: 'TEXT', // type: RAW, TEXT, PDF, JPEG, .. depends on platform
         success:function(jobID){
