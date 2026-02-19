@@ -23,7 +23,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "node-notifier": "^8.0.1",
-    "node-pre-gyp": "^0.6.36",
+    "node-pre-gyp": "^0.17.0",
     "node-printer": "^1.0.2",
     "printer": "git+https://github.com/tojocky/node-printer.git"
   },
@@ -69,6 +69,6 @@
   },
   "devDependencies": {
     "electron": "^5.0.7",
-    "electron-builder": "^23.6.0"
+    "electron-builder": "^26.8.1"
   }
 }
